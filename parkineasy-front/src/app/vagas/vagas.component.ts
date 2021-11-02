@@ -1,23 +1,22 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Vaga } from './vagas/vaga';
-import { VagasService } from './vagas/vagas.services';
+import { Vaga } from './vaga'
+import { VagasService } from './vagas.services';
 import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './vagas.component.html',
+  styleUrls: ['./vagas.component.css']
 })
 
-export class AppComponent {
-  /*
+export class VagasComponent {
   public vaga: Vaga[] = [];
 
   constructor (private vagasService: VagasService) {
    }
 
-
+   /*
   ngOnInit(){
     this.getVagas();
   }
@@ -32,7 +31,7 @@ export class AppComponent {
       }
     )
   }
-
+  */
   public onAddVaga(addForm: NgForm): void{
     this.vagasService.addVaga(addForm.value).subscribe(
       (response: Vaga) =>{
@@ -42,9 +41,11 @@ export class AppComponent {
         alert(error.message);
       }
     )
-
   }
-  */
+
+
+
+
   title = 'parkineasy-front';
 
   url ="./public/images/parkicon.png"
