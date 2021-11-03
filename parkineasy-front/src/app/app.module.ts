@@ -13,12 +13,15 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from "@angular/material/input";
 import { HttpClientModule } from '@angular/common/http';
 import { VagasComponent } from './vagas/vagas.component';
+import { FuncionariosComponent } from './funcionarios/funcionarios.component';
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    VagasComponent
+    VagasComponent,
+    FuncionariosComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +37,7 @@ import { VagasComponent } from './vagas/vagas.component';
     MatInputModule,
     HttpClientModule,
     FormsModule,
-
-
+    MatIconModule,
 
 
   ],

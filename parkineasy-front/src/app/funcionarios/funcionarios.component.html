@@ -1,0 +1,37 @@
+<div class="fundo">
+  <div class="container">
+    <mat-toolbar color="primary">
+      <span class="titulo">Cadastrar Funcionários</span>
+    </mat-toolbar>
+  </div>
+
+  <div class="centro">
+    <img class="logo" src="assets/images/parkicon.png" width="70" height="70">
+
+    <form class="form-inputs" #addForm="ngForm"(ngSubmit) ="onAddFuncionario(addForm)">
+      <mat-form-field class = 'nomeFunc' appearance="fill">
+        <mat-label>Nome do Funcionário</mat-label>
+        <input ngModel name="nome" matInput #input placeholder="Fagner Souza" required>
+        <mat-hint align="end"></mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="emailFunc" appearance="fill">
+        <mat-label>Email do Funcionário</mat-label>
+        <input ngModel name="email" matInput placeholder="funcionario@parkineasy.com" required>
+      </mat-form-field>
+
+      <mat-form-field class="senhaFunc" appearance="fill">
+        <mat-label>Senha do Funcionário</mat-label>
+        <input ngModel name="senha" matInput [type]="hide ? 'password' : 'text'" required>
+        <div mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </div>
+      </mat-form-field>
+
+      <div>
+        <button  id="criar-funcionario" type="submit" class="btn-criar" mat-raised-button color="primary">Salvar</button>
+<!--        <button  id="voltar-menu" class="btn-voltar" mat-raised-button color="primary">Voltar</button>-->
+      </div>
+    </form>
+  </div>
+</div>
