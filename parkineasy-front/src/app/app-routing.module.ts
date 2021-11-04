@@ -4,7 +4,7 @@ import { VagasComponent } from './vagas/vagas.component';
 import {FuncionariosComponent} from "./funcionarios/funcionarios.component";
 
 const routes: Routes = [
-  {path: 'gerencia', component: VagasComponent},
+  {path: 'gerencia/vagas/cadastro', component: VagasComponent},
   {path: 'gerencia/usuarios/cadastro', component:FuncionariosComponent}
 
 ];

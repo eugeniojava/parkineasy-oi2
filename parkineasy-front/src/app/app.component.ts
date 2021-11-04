@@ -1,8 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Vaga } from './vagas/vaga';
-import { VagasService } from './vagas/vagas.services';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
