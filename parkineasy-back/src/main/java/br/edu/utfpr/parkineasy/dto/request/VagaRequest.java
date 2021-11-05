@@ -11,6 +11,11 @@ public class VagaRequest {
     @Max(3)
     Integer tipo;
 
+    public VagaRequest(String codigo, Integer tipo) {
+        this.codigo = codigo;
+        this.tipo = tipo;
+    }
+
     public String getCodigo() {
         return codigo;
     }
