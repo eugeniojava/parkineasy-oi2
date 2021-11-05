@@ -1,4 +1,5 @@
-package br.edu.utfpr.parkineasy.controller;
+package br.edu.utfpr.parkineasy.service;
+
 
 import br.edu.utfpr.parkineasy.exception.ValidacaoException;
 import org.junit.jupiter.api.Test;
@@ -16,22 +17,22 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest
 @Sql(scripts = "/scripts/vagas.sql")
 @Transactional
-public class VagaControllerTest {
+public class VagaServiceTest {
 
     @Autowired
-    VagaController vagaController;
-
-    @Test
-    public void criarVaga_deveRetornarException_seVagaJaExiste() {
-        assertThatThrownBy(()->vagaController.criarVaga(umVagaRequestInvalido()))
-            .isExactlyInstanceOf(ValidacaoException.class)
-            .hasMessage("Vaga já Existe");
-    }
+    VagaService vagaService;
 
     @Test
     public void criarVaga_deveRetornarVagaResponse_seRequestForValido() {
-        assertThat(vagaController.criarVaga(umVagaRequest()))
+        assertThat(vagaService.criarVaga(umVagaRequest()))
             .extracting("codigo","descricao")
             .containsExactly("A01","COMUM");
+    }
+
+    @Test
+    public void criarVaga_deveRetornarException_seVagaJaExiste() {
+        assertThatThrownBy(()->vagaService.criarVaga(umVagaRequestInvalido()))
+            .isExactlyInstanceOf(ValidacaoException.class)
+            .hasMessage("Vaga já Existe");
     }
 }
