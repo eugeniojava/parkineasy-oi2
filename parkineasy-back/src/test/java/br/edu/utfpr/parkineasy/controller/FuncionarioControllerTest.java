@@ -8,8 +8,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import javax.transaction.Transactional;
 
-import static br.edu.utfpr.parkineasy.helper.FuncionarioHelper.umFuncionarioRequest;
-import static br.edu.utfpr.parkineasy.helper.FuncionarioHelper.umFuncionarioRequestInvalido;
+import static br.edu.utfpr.parkineasy.helper.FuncionarioHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -33,5 +32,12 @@ public class FuncionarioControllerTest {
         assertThat(funcionarioController.criarUsuario(umFuncionarioRequest()))
             .extracting("nome", "email", "senha")
             .containsExactly("Bruno","bruno@gmail.com", "12345");
+    }
+
+    @Test
+    public void criarUsuario_deveRetornarFuncionarioResponse_requestValido() {
+        assertThat(funcionarioController.criarUsuario(outroFuncionarioRequest()))
+            .extracting("nome", "email", "senha")
+            .containsExactly("Eugenio", "eugenio@gmail.com", "12345");
     }
 }

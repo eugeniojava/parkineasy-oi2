@@ -15,4 +15,8 @@ public class FuncionarioHelper {
     public static FuncionarioRequest umFuncionarioRequest() {
         return new FuncionarioRequest("Bruno","bruno@gmail.com", "12345");
     }
+
+    public static FuncionarioRequest outroFuncionarioRequest() {
+        return new FuncionarioRequest("Eugenio","eugenio@gmail.com", "12345");
+    }
 }
