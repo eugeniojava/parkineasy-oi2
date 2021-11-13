@@ -8,8 +8,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import javax.transaction.Transactional;
 
-import static br.edu.utfpr.parkineasy.helper.VagaHelper.umVagaRequest;
-import static br.edu.utfpr.parkineasy.helper.VagaHelper.umVagaRequestInvalido;
+import static br.edu.utfpr.parkineasy.helper.VagaHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -33,5 +32,12 @@ public class VagaControllerTest {
         assertThat(vagaController.criarVaga(umVagaRequest()))
             .extracting("codigo","descricao")
             .containsExactly("A01","COMUM");
+    }
+
+    @Test
+    public void criarVaga_deveRetornarVagaResponse_RequestValido() {
+        assertThat(vagaController.criarVaga(outroVagaRequest()))
+            .extracting("codigo","descricao")
+            .containsExactly("C05","IDOSO");
     }
 }

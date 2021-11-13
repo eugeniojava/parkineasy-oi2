@@ -16,4 +16,7 @@ public class VagaHelper {
         return new VagaRequest("A01",1);
     }
 
+    public static VagaRequest outroVagaRequest() {
+        return new VagaRequest("C05",3);
+    }
 }

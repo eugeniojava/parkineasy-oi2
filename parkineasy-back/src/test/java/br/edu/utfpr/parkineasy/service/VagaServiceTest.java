@@ -9,8 +9,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import javax.transaction.Transactional;
 
-import static br.edu.utfpr.parkineasy.helper.VagaHelper.umVagaRequest;
-import static br.edu.utfpr.parkineasy.helper.VagaHelper.umVagaRequestInvalido;
+import static br.edu.utfpr.parkineasy.helper.VagaHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,9 +29,18 @@ public class VagaServiceTest {
     }
 
     @Test
+    public void criarVaga_deveRetornarVagaResponse_RequestValido() {
+        assertThat(vagaService.criarVaga(outroVagaRequest()))
+            .extracting("codigo","descricao")
+            .containsExactly("C05","IDOSO");
+    }
+
+    @Test
     public void criarVaga_deveRetornarException_seVagaJaExiste() {
         assertThatThrownBy(()->vagaService.criarVaga(umVagaRequestInvalido()))
             .isExactlyInstanceOf(ValidacaoException.class)
             .hasMessage("Vaga já Existe");
     }
+
+
 }
