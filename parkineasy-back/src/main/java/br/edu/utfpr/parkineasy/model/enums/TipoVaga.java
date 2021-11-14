@@ -8,17 +8,18 @@ public enum TipoVaga {
     DEFICIENTE(2),
     IDOSO(3);
 
-    private int value;
     private static Map map = new HashMap<>();
-
-    private TipoVaga(int value) {
-        this.value = value;
-    }
 
     static {
         for (TipoVaga tipoVaga : TipoVaga.values()) {
             map.put(tipoVaga.value, tipoVaga);
         }
+    }
+
+    private int value;
+
+    private TipoVaga(int value) {
+        this.value = value;
     }
 
     public static TipoVaga valueOf(int tipoVaga) {

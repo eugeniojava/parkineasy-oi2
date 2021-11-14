@@ -5,18 +5,18 @@ import br.edu.utfpr.parkineasy.model.Funcionario;
 
 public class FuncionarioHelper {
     public static Funcionario umFuncionario() {
-        return new Funcionario("Bruno","bruno@gmail.com","12345");
+        return new Funcionario("Bruno", "bruno@gmail.com", "12345");
     }
 
     public static FuncionarioRequest umFuncionarioRequestInvalido() {
-        return new FuncionarioRequest("Marcos","marcos@gmail.com", "12345");
+        return new FuncionarioRequest("Marcos", "marcos@gmail.com", "12345");
     }
 
     public static FuncionarioRequest umFuncionarioRequest() {
-        return new FuncionarioRequest("Bruno","bruno@gmail.com", "12345");
+        return new FuncionarioRequest("Bruno", "bruno@gmail.com", "12345");
     }
 
     public static FuncionarioRequest outroFuncionarioRequest() {
-        return new FuncionarioRequest("Eugenio","eugenio@gmail.com", "12345");
+        return new FuncionarioRequest("Eugenio", "eugenio@gmail.com", "12345");
     }
 }

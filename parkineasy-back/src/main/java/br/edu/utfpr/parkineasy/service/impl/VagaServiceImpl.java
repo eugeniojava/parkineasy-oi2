@@ -18,9 +18,9 @@ public class VagaServiceImpl implements VagaService {
 
     @Override
     public VagaResponse criarVaga(VagaRequest vagaRequest) {
-        if(vagaRepository.existsById(vagaRequest.getCodigo())){
+        if (vagaRepository.existsById(vagaRequest.getCodigo())) {
             throw new ValidacaoException("Vaga já Existe");
         }
-        return new VagaResponse(vagaRepository.save(new Vaga(vagaRequest.getCodigo(),vagaRequest.getTipo())));
+        return new VagaResponse(vagaRepository.save(new Vaga(vagaRequest.getCodigo(), vagaRequest.getTipo())));
     }
 }

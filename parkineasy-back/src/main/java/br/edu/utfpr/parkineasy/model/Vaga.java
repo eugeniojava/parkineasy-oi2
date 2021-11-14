@@ -1,9 +1,11 @@
 package br.edu.utfpr.parkineasy.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="vaga")
+@Table(name = "vaga")
 public class Vaga {
     @Id
     private String codigo;
