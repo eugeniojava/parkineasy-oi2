@@ -8,8 +8,6 @@ import br.edu.utfpr.parkineasy.repository.FuncionarioRepository;
 import br.edu.utfpr.parkineasy.service.FuncionarioService;
 import org.springframework.stereotype.Service;
 
-import static org.springframework.util.ObjectUtils.isEmpty;
-
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
     private final FuncionarioRepository funcionarioRepository;
@@ -19,12 +17,15 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
-    public FuncionarioResponse criarUsuario(FuncionarioRequest funcionarioRequest) {
-        if (!isEmpty(funcionarioRepository.findTopByEmail(funcionarioRequest.getEmail()))) {
-            throw new ValidacaoException("Este email já foi cadastrado!");
-        } else {
-            return new FuncionarioResponse(funcionarioRepository.save(new Funcionario(funcionarioRequest.getNome(),
-                funcionarioRequest.getEmail(), funcionarioRequest.getSenha())));
+    public FuncionarioResponse criarFuncionario(FuncionarioRequest funcionarioRequest) {
+        if (funcionarioRepository.findByEmail(funcionarioRequest.getEmail()).isPresent()) {
+            throw new ValidacaoException("Email ja cadastrado");
         }
+        Funcionario funcionario = new Funcionario(
+            funcionarioRequest.getNome(),
+            funcionarioRequest.getEmail(),
+            funcionarioRequest.getSenha()
+        );
+        return new FuncionarioResponse(funcionarioRepository.save(funcionario));
     }
 }

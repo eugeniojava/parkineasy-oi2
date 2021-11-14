@@ -1,4 +1,4 @@
-package br.edu.utfpr.parkineasy.model.enums;
+package br.edu.utfpr.parkineasy.model.enumeration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ public enum TipoVaga {
     DEFICIENTE(2),
     IDOSO(3);
 
-    private static Map map = new HashMap<>();
+    private static final Map<Integer, TipoVaga> map = new HashMap<>();
 
     static {
         for (TipoVaga tipoVaga : TipoVaga.values()) {
@@ -16,19 +16,17 @@ public enum TipoVaga {
         }
     }
 
-    private int value;
+    private final int value;
 
-    private TipoVaga(int value) {
+    TipoVaga(int value) {
         this.value = value;
     }
 
     public static TipoVaga valueOf(int tipoVaga) {
-        return (TipoVaga) map.get(tipoVaga);
+        return map.get(tipoVaga);
     }
 
     public int getValue() {
         return value;
     }
 }
-
-

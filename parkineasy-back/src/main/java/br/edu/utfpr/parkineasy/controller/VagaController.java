@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/gerencia/vagas")
+@RequestMapping("/api/v1/gerencia/vagas")
 public class VagaController {
     private final VagaService vagaService;
 
@@ -21,6 +21,5 @@ public class VagaController {
     @PostMapping
     public VagaResponse criarVaga(@RequestBody @Valid VagaRequest vagaRequest) {
         return vagaService.criarVaga(vagaRequest);
-
     }
 }

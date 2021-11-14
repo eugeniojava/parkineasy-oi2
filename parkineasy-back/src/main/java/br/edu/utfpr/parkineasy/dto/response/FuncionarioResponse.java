@@ -3,9 +3,9 @@ package br.edu.utfpr.parkineasy.dto.response;
 import br.edu.utfpr.parkineasy.model.Funcionario;
 
 public class FuncionarioResponse {
-    String nome;
-    String email;
-    String senha;
+    private final String nome;
+    private final String email;
+    private final String senha;
 
     public FuncionarioResponse(Funcionario funcionario) {
         this.nome = funcionario.getNome();

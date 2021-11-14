@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/gerencia/usuarios")
+@RequestMapping("/api/v1/gerencia/usuarios")
 public class FuncionarioController {
-
     private final FuncionarioService funcionarioService;
 
     public FuncionarioController(FuncionarioService funcionarioService) {
@@ -20,7 +19,7 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public FuncionarioResponse criarUsuario(@RequestBody @Valid FuncionarioRequest funcionarioRequest) {
-        return funcionarioService.criarUsuario(funcionarioRequest);
+    public FuncionarioResponse criarFuncionario(@RequestBody @Valid FuncionarioRequest funcionarioRequest) {
+        return funcionarioService.criarFuncionario(funcionarioRequest);
     }
 }

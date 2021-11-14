@@ -23,21 +23,21 @@ public class FuncionarioControllerTest {
 
     @Test
     public void criarUsuario_deveRetornarException_seUsuarioJaExiste() {
-        assertThatThrownBy(() -> funcionarioController.criarUsuario(umFuncionarioRequestInvalido()))
+        assertThatThrownBy(() -> funcionarioController.criarFuncionario(umFuncionarioRequestInvalido()))
             .isExactlyInstanceOf(ValidacaoException.class)
             .hasMessage("Este email já foi cadastrado!");
     }
 
     @Test
     public void criarUsuario_deveRetornarFuncionarioResponse_seRequestForValido() {
-        assertThat(funcionarioController.criarUsuario(umFuncionarioRequest()))
+        assertThat(funcionarioController.criarFuncionario(umFuncionarioRequest()))
             .extracting("nome", "email", "senha")
             .containsExactly("Bruno", "bruno@gmail.com", "12345");
     }
 
     @Test
     public void criarUsuario_deveRetornarFuncionarioResponse_requestValido() {
-        assertThat(funcionarioController.criarUsuario(outroFuncionarioRequest()))
+        assertThat(funcionarioController.criarFuncionario(outroFuncionarioRequest()))
             .extracting("nome", "email", "senha")
             .containsExactly("Eugenio", "eugenio@gmail.com", "12345");
     }

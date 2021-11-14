@@ -10,7 +10,6 @@ import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
 public class ParkineasyApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ParkineasyApplication.class, args);
     }
