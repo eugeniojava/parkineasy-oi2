@@ -1,5 +1,6 @@
 package br.edu.utfpr.parkineasy.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,6 +13,7 @@ public class Vaga {
 
     private Boolean ocupada;
 
+    @Column(name = "tipo_vaga")
     private Integer tipoVaga;
 
     public Vaga() {

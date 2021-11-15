@@ -1,6 +1,6 @@
 package br.edu.utfpr.parkineasy.handler;
 
-import br.edu.utfpr.parkineasy.exception.ValidacaoException;
+import javax.validation.ValidationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(value = ValidacaoException.class)
+    @ExceptionHandler(value = ValidationException.class)
     protected ResponseEntity<Object> handleConflict(RuntimeException e, WebRequest request) {
         String bodyOfResponse = e.getMessage();
         return handleExceptionInternal(e, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);

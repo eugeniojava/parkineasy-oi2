@@ -1,19 +1,23 @@
-import { Injectable } from "@angular/core";
-import { Observable, observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { Funcionario } from "./funcionario";
-import { environment } from "src/environments/environment";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-@Injectable({providedIn:'root'})
-export class FuncionariosServices{
+import { FuncionarioRequest } from './funcionario-request';
+import { FuncionarioResponse } from './funcionario-response';
+
+@Injectable({ providedIn: 'root' })
+export class FuncionariosServices {
   private apiServerUrl = environment.apiBaseUrl;
 
-  constructor (private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  public addFuncionario(funcionario: Funcionario): Observable<Funcionario>{
-    return this.http.post<Funcionario>(`${this.apiServerUrl}/api/gerencia/usuarios`,funcionario);
+  public addFuncionario(
+    funcionarioRequest: FuncionarioRequest
+  ): Observable<FuncionarioResponse> {
+    return this.http.post<FuncionarioResponse>(
+      `${this.apiServerUrl}/api/v1/gerencia/funcionarios`,
+      funcionarioRequest
+    );
   }
-
 }
-
-

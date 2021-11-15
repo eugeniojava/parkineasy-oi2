@@ -1,0 +1,17 @@
+.header {
+  padding: 5px 20px;
+  background: royalblue;
+}
+
+.title,
+.login,
+.logout {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.login,
+.logout {
+  float: right;
+  padding-top: 10px;
+}

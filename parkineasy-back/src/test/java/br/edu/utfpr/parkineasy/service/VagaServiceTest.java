@@ -1,47 +1,129 @@
 package br.edu.utfpr.parkineasy.service;
 
 
-import br.edu.utfpr.parkineasy.exception.ValidacaoException;
-import javax.transaction.Transactional;
+import br.edu.utfpr.parkineasy.dto.request.VagaRequest;
+import br.edu.utfpr.parkineasy.dto.response.VagaResponse;
+import br.edu.utfpr.parkineasy.model.Vaga;
+import br.edu.utfpr.parkineasy.model.enumeration.TipoVaga;
+import br.edu.utfpr.parkineasy.repository.VagaRepository;
+import br.edu.utfpr.parkineasy.service.impl.VagaServiceImpl;
+import java.util.List;
+import javax.validation.ValidationException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static br.edu.utfpr.parkineasy.helper.VagaHelper.outroVagaRequest;
-import static br.edu.utfpr.parkineasy.helper.VagaHelper.umVagaRequest;
-import static br.edu.utfpr.parkineasy.helper.VagaHelper.umVagaRequestInvalido;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.tuple;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@Sql(scripts = "/scripts/vagas.sql")
-@Transactional
-public class VagaServiceTest {
+@ExtendWith(MockitoExtension.class)
+class VagaServiceTest {
+    @Mock
+    private VagaRepository vagaRepository;
 
-    @Autowired
-    VagaService vagaService;
+    private VagaService vagaService;
+
+    private static Vaga getVagaOf(String codigo, boolean ocupada, int tipoVaga) {
+        Vaga vaga = new Vaga();
+        vaga.setCodigo(codigo);
+        vaga.setOcupada(ocupada);
+        vaga.setTipoVaga(tipoVaga);
+        return vaga;
+    }
+
+    @BeforeEach
+    void setUp() {
+        vagaService = new VagaServiceImpl(vagaRepository);
+    }
 
     @Test
-    public void criarVaga_deveRetornarVagaResponse_seRequestForValido() {
-        assertThat(vagaService.criarVaga(umVagaRequest()))
+    void listarTodas_deveRetonarListaDeVagaResponse_quandoExistirVagasCadastradas() {
+        Vaga vaga1 = getVagaOf("A01", true, 1);
+        Vaga vaga2 = getVagaOf("A02", false, 2);
+        given(vagaRepository.findAll())
+            .willReturn(List.of(vaga1, vaga2));
+        List<VagaResponse> result = vagaService.listarTodas();
+        assertThat(result)
+            .extracting("codigo", "ocupada", "descricao")
+            .containsExactly(
+                tuple(vaga1.getCodigo(), vaga1.getOcupada(), TipoVaga.valueOf(vaga1.getTipoVaga()).toString()),
+                tuple(vaga2.getCodigo(), vaga2.getOcupada(), TipoVaga.valueOf(vaga2.getTipoVaga()).toString())
+            );
+    }
+
+    @Test
+    void listarTodas_deveRetornarListaDeVagaResponseVazia_quandoNaoExistirVagasCadastradas() {
+        given(vagaRepository.findAll())
+            .willReturn(List.of());
+        List<VagaResponse> result = vagaService.listarTodas();
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    void criarVaga_deveLancarException_quandoCodigoJaEstiverCadastrado() {
+        Vaga vaga = new Vaga();
+        VagaRequest vagaRequest = new VagaRequest("A01", 1);
+        given(vagaRepository.existsById(any()))
+            .willReturn(true);
+        assertThatThrownBy(() -> vagaService.criarVaga(vagaRequest))
+            .isExactlyInstanceOf(ValidationException.class)
+            .hasMessage("Vaga ja cadastrada");
+        verify(vagaRepository, never()).save(any());
+    }
+
+    @Test
+    void criarVaga_deveCriarERetornarVagaResponse_quandoCodigoNaoEstiverCadastradoETipoVagaForComum() {
+        given(vagaRepository.existsById(any()))
+            .willReturn(false);
+        String codigo = "A01";
+        boolean ocupada = false;
+        int tipoVaga = 1;
+        Vaga vaga = getVagaOf(codigo, ocupada, tipoVaga);
+        when(vagaRepository.save(any()))
+            .thenReturn(vaga);
+        VagaRequest vagaRequest = new VagaRequest(codigo, tipoVaga);
+        assertThat(vagaService.criarVaga(vagaRequest))
             .extracting("codigo", "descricao")
             .containsExactly("A01", "COMUM");
     }
 
     @Test
-    public void criarVaga_deveRetornarVagaResponse_RequestValido() {
-        assertThat(vagaService.criarVaga(outroVagaRequest()))
+    void criarVaga_deveCriarERetornarVagaResponse_quandoCodigoNaoEstiverCadastradoETipoVagaForDeficiente() {
+        given(vagaRepository.existsById(any()))
+            .willReturn(false);
+        String codigo = "B01";
+        boolean ocupada = true;
+        int tipoVaga = 2;
+        Vaga vaga = getVagaOf(codigo, ocupada, tipoVaga);
+        when(vagaRepository.save(any()))
+            .thenReturn(vaga);
+        VagaRequest vagaRequest = new VagaRequest(codigo, tipoVaga);
+        assertThat(vagaService.criarVaga(vagaRequest))
             .extracting("codigo", "descricao")
-            .containsExactly("C05", "IDOSO");
+            .containsExactly(codigo, "DEFICIENTE");
     }
 
     @Test
-    public void criarVaga_deveRetornarException_seVagaJaExiste() {
-        assertThatThrownBy(() -> vagaService.criarVaga(umVagaRequestInvalido()))
-            .isExactlyInstanceOf(ValidacaoException.class)
-            .hasMessage("Vaga já Existe");
+    void criarVaga_deveCriarERetornarVagaResponse_quandoCodigoNaoEstiverCadastradoETipoVagaForIdoso() {
+        given(vagaRepository.existsById(any()))
+            .willReturn(false);
+        String codigo = "C01";
+        boolean ocupada = false;
+        int tipoVaga = 3;
+        Vaga vaga = getVagaOf(codigo, ocupada, tipoVaga);
+        when(vagaRepository.save(any()))
+            .thenReturn(vaga);
+        VagaRequest vagaRequest = new VagaRequest(codigo, tipoVaga);
+        assertThat(vagaService.criarVaga(vagaRequest))
+            .extracting("codigo", "descricao")
+            .containsExactly(codigo, "IDOSO");
     }
-
-
 }

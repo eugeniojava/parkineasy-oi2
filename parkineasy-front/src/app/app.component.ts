@@ -1,47 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-
 export class AppComponent {
-  /*
-  public vaga: Vaga[] = [];
+  constructor() {}
 
-  constructor (private vagasService: VagasService) {
-   }
+  ngOnInit(): void {}
 
-
-  ngOnInit(){
-    this.getVagas();
-  }
-
-  public getVagas() : void{
-    this.vagasService.getVagas().subscribe(
-      (response: Vaga []) =>{
-        this.vaga = response;
-      },
-      (error : HttpErrorResponse)=>{
-        alert(error.message);
-      }
-    )
-  }
-
-  public onAddVaga(addForm: NgForm): void{
-    this.vagasService.addVaga(addForm.value).subscribe(
-      (response: Vaga) =>{
-        console.log(response)
-      },
-      (error: HttpErrorResponse)=>{
-        alert(error.message);
-      }
-    )
-
-  }
-  */
   title = 'parkineasy-front';
-
-  url ="./public/images/parkicon.png"
+  url = './public/images/parkicon.png';
 }

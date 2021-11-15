@@ -4,18 +4,25 @@ import javax.validation.constraints.NotBlank;
 
 public class FuncionarioRequest {
     @NotBlank
-    private final String email;
+    private String nome;
 
     @NotBlank
-    private final String senha;
+    private String email;
 
     @NotBlank
-    private final String nome;
+    private String senha;
 
-    public FuncionarioRequest(String nome, String email, String senha) {
+    @NotBlank
+    private String usuario;
+
+    public FuncionarioRequest() {
+    }
+
+    public FuncionarioRequest(String nome, String email, String senha, String usuario) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.usuario = usuario;
     }
 
     public String getNome() {
@@ -28,5 +35,9 @@ public class FuncionarioRequest {
 
     public String getSenha() {
         return senha;
+    }
+
+    public String getUsuario() {
+        return usuario;
     }
 }

@@ -6,11 +6,14 @@ import javax.validation.constraints.NotBlank;
 
 public class VagaRequest {
     @NotBlank
-    private final String codigo;
+    private String codigo;
 
     @Min(1)
     @Max(3)
-    private final Integer tipo;
+    private Integer tipo;
+
+    public VagaRequest() {
+    }
 
     public VagaRequest(String codigo, Integer tipo) {
         this.codigo = codigo;

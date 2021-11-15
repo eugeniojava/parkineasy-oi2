@@ -2,10 +2,12 @@ package br.edu.utfpr.parkineasy.service.impl;
 
 import br.edu.utfpr.parkineasy.dto.request.VagaRequest;
 import br.edu.utfpr.parkineasy.dto.response.VagaResponse;
-import br.edu.utfpr.parkineasy.exception.ValidacaoException;
 import br.edu.utfpr.parkineasy.model.Vaga;
 import br.edu.utfpr.parkineasy.repository.VagaRepository;
 import br.edu.utfpr.parkineasy.service.VagaService;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.ValidationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,9 +19,17 @@ public class VagaServiceImpl implements VagaService {
     }
 
     @Override
+    public List<VagaResponse> listarTodas() {
+        return vagaRepository.findAll()
+            .stream()
+            .map(VagaResponse::new)
+            .collect(Collectors.toList());
+    }
+
+    @Override
     public VagaResponse criarVaga(VagaRequest vagaRequest) {
         if (vagaRepository.existsById(vagaRequest.getCodigo())) {
-            throw new ValidacaoException("Vaga ja cadastrada");
+            throw new ValidationException("Vaga ja cadastrada");
         }
         Vaga vaga = new Vaga(
             vagaRequest.getCodigo(),

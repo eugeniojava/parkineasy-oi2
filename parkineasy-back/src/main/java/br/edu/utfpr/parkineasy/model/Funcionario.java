@@ -19,13 +19,16 @@ public class Funcionario {
 
     private String senha;
 
+    private String usuario;
+
     public Funcionario() {
     }
 
-    public Funcionario(String nome, String email, String senha) {
+    public Funcionario(String nome, String email, String senha, String usuario) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -58,5 +61,13 @@ public class Funcionario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }
