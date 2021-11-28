@@ -7,9 +7,17 @@
       <div class="col" *ngIf="!authService.isAuthenticated()">
         <a href="/login" class="login btn btn-default">Login (funcionário)</a>
       </div>
+
+      <div class="col" *ngIf="authService.isAuthenticated()">
+        <a href="/gerencia/vagas/cadastro" class="logout btn btn-default">Cadastrar vagas</a>
+      </div>
+      <div class="col" *ngIf="authService.isAuthenticated()">
+        <a href="/gerencia/funcionarios/cadastro" class="logout btn btn-default">Cadastrar funcionários</a>
+      </div>
       <div class="col" *ngIf="authService.isAuthenticated()">
         <a class="logout btn btn-default" (click)="logout()">Deslogar</a>
       </div>
+
     </div>
   </div>
 </div>

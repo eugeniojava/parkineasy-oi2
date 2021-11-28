@@ -21,6 +21,8 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientInterceptor } from './http-client-interceptor';
 import { VagasComponent } from './vagas/vagas.component';
 import { SelecionarvagaComponent } from './selecionarvaga/selecionarvaga.component';
+import { TiposvagasComponent } from './tiposvagas/tiposvagas.component';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { SelecionarvagaComponent } from './selecionarvaga/selecionarvaga.compone
     LoginComponent,
     HomeComponent,
     SelecionarvagaComponent,
+    TiposvagasComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import { FuncionariosComponent } from './funcionarios/funcionarios.component';
 import { HomeComponent } from './home/home.component';
 import { VagasComponent } from './vagas/vagas.component';
 import {SelecionarvagaComponent} from "./selecionarvaga/selecionarvaga.component";
+import { TiposvagasComponent } from './tiposvagas/tiposvagas.component';
+
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -26,7 +28,12 @@ const routes: Routes = [
     path: 'usuario/vaga/selecionarvaga/:id',
     component: SelecionarvagaComponent,
   },
+  {
+    path: 'teste',
+    component: TiposvagasComponent,
+  },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

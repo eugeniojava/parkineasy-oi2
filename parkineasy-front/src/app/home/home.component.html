@@ -1,20 +1,4 @@
 <div class="content">
-  <div class="container">
-    <h1>
-      Bem-vindo(a),
-      {{
-        authService.isAuthenticated() ? authService.getUsername() : "cliente"
-      }}
-    </h1>
-    <div *ngIf="authService.isAuthenticated()">
-      <a href="/gerencia/vagas/cadastro" class="btn btn-md btn-primary m-2"
-        >Cadastrar vagas</a
-      ><br />
-      <a
-        href="/gerencia/funcionarios/cadastro"
-        class="btn btn-md btn-primary m-2"
-        >Cadastrar funcionários</a
-      >
-    </div>
-  </div>
+
 </div>
+  <app-tiposvagas></app-tiposvagas>
