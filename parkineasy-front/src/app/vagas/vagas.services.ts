@@ -18,4 +18,10 @@ export class VagasService {
       vagaRequest
     );
   }
+
+  public listarVagasPorTipo(id:number) {
+    return this.http.get<Array<string>>(
+      `${this.apiServerUrl}/api/v1/gerencia/vagas/tipovaga/${id}`
+    );
+  }
 }

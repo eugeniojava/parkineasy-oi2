@@ -20,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientInterceptor } from './http-client-interceptor';
 import { VagasComponent } from './vagas/vagas.component';
+import { SelecionarvagaComponent } from './selecionarvaga/selecionarvaga.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { VagasComponent } from './vagas/vagas.component';
     HeaderComponent,
     LoginComponent,
     HomeComponent,
+    SelecionarvagaComponent,
   ],
   imports: [
     BrowserModule,
