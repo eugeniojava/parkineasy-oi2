@@ -27,6 +27,14 @@ public class VagaServiceImpl implements VagaService {
     }
 
     @Override
+    public List<String> listarPorTipoVaga(Integer id) {
+        return vagaRepository.findAllByTipoVagaAndOcupada(id, Boolean.FALSE)
+            .stream()
+            .map(Vaga::getCodigo)
+            .collect(Collectors.toList());
+    }
+
+    @Override
     public VagaResponse criarVaga(VagaRequest vagaRequest) {
         if (vagaRepository.existsById(vagaRequest.getCodigo())) {
             throw new ValidationException("Vaga ja cadastrada");

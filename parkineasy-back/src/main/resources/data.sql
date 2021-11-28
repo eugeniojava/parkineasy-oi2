@@ -6,4 +6,10 @@ VALUES (1L, 'Marcos', 'marcos@gmail.com', '$2a$12$47RX.GQFDLFKi0IJnR6wFelI98dTE/
 INSERT INTO vaga(codigo, ocupada, tipo_vaga)
 VALUES ('A01', FALSE, 1),
        ('A02', TRUE, 2),
-       ('A03', TRUE, 3);
+       ('A03', FALSE, 3),
+       ('A04', TRUE, 3),
+       ('A05', FALSE, 1),
+       ('A06', TRUE, 2),
+       ('A07', FALSE, 3),
+       ('A08', FALSE, 2);
+       

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface VagaService {
     List<VagaResponse> listarTodas();
+    
+    List<String> listarPorTipoVaga(Integer id);
 
     VagaResponse criarVaga(VagaRequest vagaRequest);
 }

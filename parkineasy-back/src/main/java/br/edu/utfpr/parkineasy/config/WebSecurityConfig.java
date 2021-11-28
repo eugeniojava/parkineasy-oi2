@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.authorizeRequests()
             .antMatchers("/auth/**").permitAll()
+            .antMatchers("/api/v1/gerencia/vagas/tipovaga/**").permitAll()
             .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         http.sessionManagement()
