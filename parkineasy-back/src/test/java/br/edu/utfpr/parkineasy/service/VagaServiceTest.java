@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -65,6 +65,26 @@ class VagaServiceTest {
             .willReturn(List.of());
         List<VagaResponse> result = vagaService.listarTodas();
         assertThat(result).isEmpty();
+    }
+
+    @Test
+    void listarPorTipoVaga_deveRetornarListaVazia_quandoNaoExistirVagasCadastradas() {
+        given(vagaRepository.findAllByTipoVagaAndOcupada(anyInt(), anyBoolean()))
+            .willReturn(List.of());
+        List<String> result = vagaService.listarPorTipoVaga(1);
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    void listarPorTipoVaga_deveRetonarListaString_quandoExistirVagasLivres() {
+        Vaga vaga1 = getVagaOf("A01", false, 1);
+        Vaga vaga2 = getVagaOf("A02", false, 1);
+        given(vagaRepository.findAllByTipoVagaAndOcupada(1, false))
+            .willReturn(List.of(vaga1, vaga2));
+        List<String> result = vagaService.listarPorTipoVaga(1);
+        assertThat(result)
+            .containsExactly((vaga1.getCodigo()), (vaga2.getCodigo()))
+            .hasSize(2);
     }
 
     @Test
