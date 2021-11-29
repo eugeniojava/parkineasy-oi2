@@ -6,7 +6,6 @@ import br.edu.utfpr.parkineasy.model.Ticket;
 import br.edu.utfpr.parkineasy.repository.TicketRepository;
 import br.edu.utfpr.parkineasy.service.impl.TicketServiceImpl;
 import java.time.LocalDateTime;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -8,7 +8,6 @@ import br.edu.utfpr.parkineasy.model.enumeration.TipoVaga;
 import br.edu.utfpr.parkineasy.repository.VagaRepository;
 import br.edu.utfpr.parkineasy.service.impl.VagaServiceImpl;
 import java.util.List;
-import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
