@@ -6,6 +6,7 @@ import br.edu.utfpr.parkineasy.model.Vaga;
 import br.edu.utfpr.parkineasy.repository.VagaRepository;
 import br.edu.utfpr.parkineasy.service.VagaService;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.validation.ValidationException;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,14 @@ public class VagaServiceImpl implements VagaService {
             vagaRequest.getTipo()
         );
         return new VagaResponse(vagaRepository.save(vaga));
+    }
+
+    @Override
+    public void ocuparVaga(String codigo) {
+        Optional<Vaga> vaga = vagaRepository.findById(codigo);
+        vaga.ifPresent(v -> {
+            v.setOcupada(true);
+            vagaRepository.save(vaga.get());
+        });
     }
 }

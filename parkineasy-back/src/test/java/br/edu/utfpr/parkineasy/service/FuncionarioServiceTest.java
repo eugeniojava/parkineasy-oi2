@@ -7,6 +7,7 @@ import br.edu.utfpr.parkineasy.repository.FuncionarioRepository;
 import br.edu.utfpr.parkineasy.service.impl.FuncionarioServiceImpl;
 import java.util.List;
 import java.util.Optional;
+import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

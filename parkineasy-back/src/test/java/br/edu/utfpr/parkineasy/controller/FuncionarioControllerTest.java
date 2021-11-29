@@ -6,6 +6,7 @@ import br.edu.utfpr.parkineasy.model.Funcionario;
 import br.edu.utfpr.parkineasy.service.FuncionarioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

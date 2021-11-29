@@ -2,6 +2,7 @@ package br.edu.utfpr.parkineasy.repository;
 
 import br.edu.utfpr.parkineasy.model.Funcionario;
 import java.util.Optional;
+import javax.transaction.Transactional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

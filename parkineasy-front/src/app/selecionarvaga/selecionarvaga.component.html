@@ -12,10 +12,10 @@
       height="70"
       alt="Parkineasy icon"
     />
-    <form #addForm="ngForm">
+    <form #addForm="ngForm" (ngSubmit)="confirmar(addForm)">
       <mat-form-field class="selecionarVaga" appearance="fill">
         <mat-label>Selecione uma Vaga</mat-label>
-        <mat-select ngModel name="selecVaga" >
+        <mat-select ngModel name="codigoVaga">
           <mat-option *ngFor="let vaga of listaVagas" [value]="vaga">
             {{ vaga }}
           </mat-option>
@@ -31,7 +31,8 @@
         >
           Confirmar
         </button>
-        <button (click)="voltar()"
+        <button
+          (click)="voltar()"
           id="voltar-selecao"
           class="btn-voltar"
           mat-raised-button

@@ -7,6 +7,7 @@ import br.edu.utfpr.parkineasy.model.enumeration.TipoVaga;
 import br.edu.utfpr.parkineasy.service.VagaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import javax.transaction.Transactional;
 import javax.validation.ValidationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

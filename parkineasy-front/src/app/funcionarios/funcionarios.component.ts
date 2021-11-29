@@ -16,7 +16,14 @@ export class FuncionariosComponent {
   public onAddFuncionario(addForm: NgForm): void {
     this.funcionariosServices.addFuncionario(addForm.value).subscribe({
       next: (response: FuncionarioResponse) => {
-        console.log(response);
+        let resposta = `
+        Funcionário criado com sucesso!
+        ID: ${response.id}
+        Nome: ${response.nome}
+        E-mail: ${response.email}
+        Usuário: ${response.usuario}`;
+        alert(resposta);
+        window.location.reload();
       },
       error: (error: HttpErrorResponse) => {
         alert(error.message);
